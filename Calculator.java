@@ -312,35 +312,31 @@ public class Calculator  implements ActionListener {
 				textField4.setText(textField4.getText().concat(""));
 		}	
 			if (e.getSource()==subButton) {	// SUBTRACTION bUTTON -1-1-1-1-1-
-				textField1.setText(String.valueOf(result));
-				double temp = Double.parseDouble(textField1.getText());
-				temp*=-1;
-				textField1.setText(String.valueOf(temp));
+					textField1.setText(String.valueOf(result));
 				//  2 negatives make a positive.
-				
+					if (result>0.00) {
+						operator='-';
+						num1=(Double.parseDouble(textField1.getText()));
+						textField1.setText(String.valueOf(result));
+					}
 				
 				if ( operator=='*' || operator=='/'  ) { // changes operator to '*'||'/' when multiplying negative numbers.
-					
+						
+					double temp = Double.parseDouble(textField1.getText());
+					temp*=-1;
+			
 					textField1.setText(String.valueOf(temp));
 					textField3.setText(textField3.getText().concat("-"));
 					textField4.setText("");
 					textField4.setText(textField4.getText().concat(""));
 					
-					
-					
-				
 						if (num1<0.00  ) {
 							
 							num1=Math.abs(Double.parseDouble(textField1.getText()));
-							textField1.setText(String.valueOf(result));
-						}
-						else {
-							num1=(Double.parseDouble(textField1.getText()));
-							textField1.setText(String.valueOf(-1*result));
+							textField1.setText(String.valueOf(temp));	
 						}
 				}
-				
-					
+			
 				else {
 				
 					textField1.setText(String.valueOf(result));
@@ -356,10 +352,7 @@ public class Calculator  implements ActionListener {
 					num1=Double.parseDouble(textField5.getText());
 					textField1.setText(String.valueOf(result));	
 				}
-			
-					
-				
-			
+	
 		 }
 			
 			if (e.getSource()==addButton) { // Addition Button  +0+0+0+0+
