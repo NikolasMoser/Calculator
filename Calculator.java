@@ -1,4 +1,5 @@
 
+
 import java.math.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -223,7 +224,9 @@ public class Calculator  implements ActionListener {
 		
 		panel5.add(panel10,BorderLayout.CENTER);
 
-		
+		//frame.getContentPane().add(label);
+		//frame.add(textField3); // SHOWS WORK
+		//frame.add(textField2); //  SHOWS RESULT
 		frame.add(textField1); // CALCULATIONS
 		frame.add(textField4); // CALCULATIONS
 		frame.add(textField5); // extra for me to visualize 
@@ -231,7 +234,9 @@ public class Calculator  implements ActionListener {
 		
 		frame.add(panel1,BorderLayout.NORTH); // must be last to add to show
 		panel1.setLayout(new FlowLayout(FlowLayout.RIGHT));	
-		
+	//	frame.add(panel2,BorderLayout.WEST);
+		//frame.add(panel3,BorderLayout.EAST);
+	
 		frame.add(panel5,BorderLayout.CENTER);
 	
 		for(int i=0; i<10; i++) {
@@ -271,6 +276,7 @@ public class Calculator  implements ActionListener {
 		percentButton.setFont(font7);
 		clearButton.setFont(font8);
 		decimalButton.setFont(font1);
+	
 	}	
 		
 	public  void actionPerformed(ActionEvent e) {
@@ -278,20 +284,20 @@ public class Calculator  implements ActionListener {
 	 DecimalFormat decimalFormat = new DecimalFormat("#.##########"); //DF class if ( 0.##) not set auto strips extra .000s
 		for(int i=0; i<10; i++) { // for loop under actionPerformed Class
 			if(e.getSource() == numberButtons[i]) { //nested if(){ statement inside for(){  loop
-				
 				textField1.setText(textField1.getText().concat(String.valueOf((decimalFormat.format(i)))));// argument to fill field with i number button
 				textField3.setText(textField3.getText().concat(String.valueOf(decimalFormat.format((i)))));	
 				textField4.setText(textField4.getText().concat(String.valueOf(((i)))));	
-			
+				////////////////////
 				textField5.setText(textField5.getText().concat(String.valueOf(decimalFormat.format((i))))); 
-			
+				///////////////////// 
 				textField3.setFont(font2);
 				textField3.setForeground(Color.white);
 				textField3.setBackground(BLACK2_COLOR);
 				textField2.setForeground(Color.white);
 				textField2.setBackground(BLACK2_COLOR);
 				textField2.setHorizontalAlignment(JTextField.RIGHT);
-	
+				
+				
 			}
 		}
 			if (e.getSource()==decimalButton) {// Decimal Button  0.0.0.0.0.0.0.0
@@ -314,40 +320,41 @@ public class Calculator  implements ActionListener {
 				textField4.setText(textField4.getText().concat(""));
 		}	
 			if (e.getSource()==subButton) {	// SUBTRACTION bUTTON -1-1-1-1-1-
-			
+					///*
+					textField6.setText(String.valueOf(num2));
+					///*
 					textField1.setText(String.valueOf(result));
+					
 				//  2 negatives make a positive.
 					if (result>0.00) {
-						
 						operator='-';
 						num1=(Double.parseDouble(textField1.getText()));
 						textField5.setText(String.valueOf(result));
 					}
 					
 				if ( operator=='*' || operator=='/'  ) { // changes operator to '*'||'/' when multiplying negative numbers.
-				
+					// fix when negative result minus operator stuck on '*' or '/' ????
 						if (result==num1*-num2) {
 								result*= -1;
 								num1=(Double.parseDouble(textField1.getText()));
 								textField1.setText(String.valueOf(result));
 							}
 		
-					textField1.setText(String.valueOf(result));
-					textField3.setText(textField3.getText().concat("-"));
-					textField4.setText("");
-					textField4.setText(textField4.getText().concat(""));
+							textField1.setText(String.valueOf(result));
+							textField3.setText(textField3.getText().concat("-"));
+							textField4.setText("");
+							textField4.setText(textField4.getText().concat(""));
 					
-						if (num1<0.00  ) {
-							
+						if (num1<0.00  ) {			
 							num1=Math.abs(Double.parseDouble(textField1.getText()));
 							textField1.setText(String.valueOf(result));	
-						
 						}
-		
 				}
 			
 				else {
-				
+					////*
+					textField6.setText("");
+					////*
 					num1=Double.parseDouble(textField1.getText());
 					operator='-';
 					textField3.setText(textField3.getText().concat("-"));
@@ -356,17 +363,13 @@ public class Calculator  implements ActionListener {
 				}
 				
 				////*
-				if (textField6.getText().isEmpty() ) { // checks is extra textField '6' is empty 
+				if (textField6.getText().isEmpty() ) { // checks is extra textField '6' is empty 					
 					textField1.setText(String.valueOf(result));	
 					num1=Double.parseDouble(textField5.getText()); // puts num1 in different field for subtraction
 				}
-				if (operator=='-') {
-					textField6.setText(String.valueOf(num2));
-				}
-				else {
 					textField6.setText("");
-				}
-				////*
+				////*	
+	
 		 }
 			
 			if (e.getSource()==addButton) { // Addition Button  +0+0+0+0+
@@ -431,7 +434,9 @@ public class Calculator  implements ActionListener {
 					textField3.setHorizontalAlignment(JTextField.RIGHT);
 					textField2.setHorizontalAlignment(JTextField.RIGHT);
 					textField2.setBackground(BLACK2_COLOR);
+				
 			
+					
 				switch(operator) {
 					
 					case'*':
@@ -482,6 +487,8 @@ public class Calculator  implements ActionListener {
 			result=0;
 			operator='\0';	
 			//**reveals field2 after numberButtons press**	// cut?
+			//textField2.setBounds(1, 91, 300, 42); // resets textfield3 and font back to normal with numberbuttons
+			//textField3.setBounds(1,55, 300, 47);
 			textField3.setFont(font2);
 			textField3.setBackground(BLACK2_COLOR);
 			textField2.setForeground(Color.white);
@@ -497,9 +504,7 @@ public class Calculator  implements ActionListener {
 		  
 		   	num1=Double.parseDouble(textField5.getText());
 		  	num2=Double.parseDouble(textField4.getText());
-	
-		   
-		   	   
+	   
 		   	textField1.setText(textField1.getText().substring(0, textField1.getText().length() - 1));
 		   	
 		   	textField2.setText(textField2.getText().substring(0, textField2.getText().length() - 1));
@@ -509,11 +514,7 @@ public class Calculator  implements ActionListener {
 		   	textField4.setText(textField4.getText().substring(0, textField1.getText().length() - 1));
 		   	
 		   	textField5.setText(textField5.getText().substring(0, textField1.getText().length() - 1));
-		   	
-		
-		   	
-	    	
-		   
+   
 	   }	
 	}	
 }
