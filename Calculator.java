@@ -324,9 +324,8 @@ public class Calculator  implements ActionListener {
 						textField5.setText(String.valueOf(result));
 					}
 					
-				//textField1.setText(String.valueOf(result));
 				if ( operator=='*' || operator=='/'  ) { // changes operator to '*'||'/' when multiplying negative numbers.
-					// fix when negative result minus operator stuck on '*' or '/' ????
+				
 						if (result==num1*-num2) {
 								result*= -1;
 								num1=(Double.parseDouble(textField1.getText()));
@@ -344,8 +343,7 @@ public class Calculator  implements ActionListener {
 							textField1.setText(String.valueOf(result));	
 						
 						}
-						
-						
+		
 				}
 			
 				else {
@@ -433,9 +431,7 @@ public class Calculator  implements ActionListener {
 					textField3.setHorizontalAlignment(JTextField.RIGHT);
 					textField2.setHorizontalAlignment(JTextField.RIGHT);
 					textField2.setBackground(BLACK2_COLOR);
-				
 			
-					
 				switch(operator) {
 					
 					case'*':
@@ -486,8 +482,6 @@ public class Calculator  implements ActionListener {
 			result=0;
 			operator='\0';	
 			//**reveals field2 after numberButtons press**	// cut?
-			//textField2.setBounds(1, 91, 300, 42); // resets textfield3 and font back to normal with numberbuttons
-			//textField3.setBounds(1,55, 300, 47);
 			textField3.setFont(font2);
 			textField3.setBackground(BLACK2_COLOR);
 			textField2.setForeground(Color.white);
