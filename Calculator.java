@@ -1,5 +1,3 @@
-
-
 import java.math.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -35,12 +33,9 @@ public class Calculator  implements ActionListener {
 	static Font font7 = new Font("Dialog", Font.BOLD,22); // percentButton
 	static Font font8 = new Font("Serif", Font.BOLD,24); // AC clear button
 	
-	double num1=0,num2=0;
-	 double result=0;
+	double num1=0,num2=0, result=0;;
 	char operator;
 	
-
-
 	public static final Color blue_gray = new Color(46, 56, 58); // equalButton
 	public static final Color BLACK1_COLOR = new Color(10, 15, 15); // number Buttons inner square
 	public static final Color BLACK2_COLOR = new Color(13, 16, 18); // textFields and Label
@@ -212,21 +207,14 @@ public class Calculator  implements ActionListener {
 		panel10.setBackground(Color.white);
 	
 		panel5.setLayout(new BorderLayout(0,0)); //main panel5 set borderlayout first
-				
-		//panel6.setPreferredSize(new Dimension(50,100)); // setPrefferedSize integral to nest working
-		//panel7.setPreferredSize(new Dimension(100,70));
-		//panel8.setPreferredSize(new Dimension(50,50));
+			
 		panel9.setPreferredSize(new Dimension(00,50)); // effects above and right side black space.. size not adjustable.
 		panel10.setPreferredSize(new Dimension(550,550));
 	
-		//panel5.add(panel8,BorderLayout.WEST);
 		panel5.add(panel9,BorderLayout.EAST);
 		
 		panel5.add(panel10,BorderLayout.CENTER);
 
-		//frame.getContentPane().add(label);
-		//frame.add(textField3); // SHOWS WORK
-		//frame.add(textField2); //  SHOWS RESULT
 		frame.add(textField1); // CALCULATIONS
 		frame.add(textField4); // CALCULATIONS
 		frame.add(textField5); // extra for me to visualize 
@@ -234,9 +222,7 @@ public class Calculator  implements ActionListener {
 		
 		frame.add(panel1,BorderLayout.NORTH); // must be last to add to show
 		panel1.setLayout(new FlowLayout(FlowLayout.RIGHT));	
-	//	frame.add(panel2,BorderLayout.WEST);
-		//frame.add(panel3,BorderLayout.EAST);
-	
+		
 		frame.add(panel5,BorderLayout.CENTER);
 	
 		for(int i=0; i<10; i++) {
@@ -296,10 +282,9 @@ public class Calculator  implements ActionListener {
 				textField2.setForeground(Color.white);
 				textField2.setBackground(BLACK2_COLOR);
 				textField2.setHorizontalAlignment(JTextField.RIGHT);
-				
-				
-			}
+			}				
 		}
+		
 			if (e.getSource()==decimalButton) {// Decimal Button  0.0.0.0.0.0.0.0
 				textField1.setText(textField1.getText().concat("."));
 				textField3.setText(textField3.getText().concat("."));
@@ -320,9 +305,7 @@ public class Calculator  implements ActionListener {
 				textField4.setText(textField4.getText().concat(""));
 		}	
 			if (e.getSource()==subButton) {	// SUBTRACTION bUTTON -1-1-1-1-1-
-					///*
-					textField6.setText(String.valueOf(num2));
-					///*
+
 					textField1.setText(String.valueOf(result));
 					
 				//  2 negatives make a positive.
@@ -333,6 +316,7 @@ public class Calculator  implements ActionListener {
 					}
 					
 				if ( operator=='*' || operator=='/'  ) { // changes operator to '*'||'/' when multiplying negative numbers.
+					textField6.setText(String.valueOf(num2));
 					// fix when negative result minus operator stuck on '*' or '/' ????
 						if (result==num1*-num2) {
 								result*= -1;
@@ -350,26 +334,21 @@ public class Calculator  implements ActionListener {
 							textField1.setText(String.valueOf(result));	
 						}
 				}
-			
+				
 				else {
-					////*
-					textField6.setText("");
-					////*
+				
 					num1=Double.parseDouble(textField1.getText());
 					operator='-';
 					textField3.setText(textField3.getText().concat("-"));
 					textField4.setText("");
 					textField4.setText(textField4.getText().concat(""));	
+
 				}
-				
-				////*
-				if (textField6.getText().isEmpty() ) { // checks is extra textField '6' is empty 					
+					// switches num1 location to make above negative * negative code work when doing normal subtraction from 0
+					if ( e.getSource()==subButton && result== 0.00 && textField6.getText().isEmpty()) {
+					num1=Double.parseDouble(textField5.getText());
 					textField1.setText(String.valueOf(result));	
-					num1=Double.parseDouble(textField5.getText()); // puts num1 in different field for subtraction
-				}
-					textField6.setText("");
-				////*	
-	
+				}		
 		 }
 			
 			if (e.getSource()==addButton) { // Addition Button  +0+0+0+0+
@@ -435,15 +414,13 @@ public class Calculator  implements ActionListener {
 					textField2.setHorizontalAlignment(JTextField.RIGHT);
 					textField2.setBackground(BLACK2_COLOR);
 				
-			
-					
+	
 				switch(operator) {
 					
 					case'*':
 						result=num1*num2;	
 						textField1.setText(String.valueOf(decimalFormat.format(result)));
-						textField5.setText(String.valueOf(decimalFormat.format(num1)));	
-						
+						textField5.setText(String.valueOf(decimalFormat.format(num1)));		
 						break;
 					case'/':
 						result=num1/num2; 
@@ -451,8 +428,7 @@ public class Calculator  implements ActionListener {
 						textField5.setText(String.valueOf(decimalFormat.format(num1)));	
 						break;		
 					case'-':	
-					
-						result=num1+(-1*num2);
+						result=num1-num2;
 						textField1.setText(String.valueOf(decimalFormat.format(result)));
 						textField5.setText(String.valueOf(decimalFormat.format(num1)));	
 						break;
@@ -482,19 +458,12 @@ public class Calculator  implements ActionListener {
 			textField1.setText("");
 			textField4.setText("");
 			textField5.setText("");
+			textField6.setText("");
+			
 			num1=0;
 			num2=0;
 			result=0;
 			operator='\0';	
-			//**reveals field2 after numberButtons press**	// cut?
-			//textField2.setBounds(1, 91, 300, 42); // resets textfield3 and font back to normal with numberbuttons
-			//textField3.setBounds(1,55, 300, 47);
-			textField3.setFont(font2);
-			textField3.setBackground(BLACK2_COLOR);
-			textField2.setForeground(Color.white);
-			textField2.setBackground(BLACK2_COLOR);
-			textField2.setVisible(true);	
-			/////////////////////////////////////// cut?
 		}	
 	
 		if(e.getSource()==deleteButton) {
