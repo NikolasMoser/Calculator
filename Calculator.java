@@ -318,7 +318,7 @@ public class Calculator  implements ActionListener {
 				if ( operator=='*' || operator=='/'  ) { // changes operator to '*'||'/' when multiplying negative numbers.
 					
 					// fix when negative result minus operator stuck on '*' or '/' ????
-						if (result==num1*-num2) {
+						if (result==num1*-num2 || result==num1/-num2) {
 								result*= -1;
 								num1=(Double.parseDouble(textField1.getText()));
 								
