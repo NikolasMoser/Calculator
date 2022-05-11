@@ -314,16 +314,17 @@ public class Calculator  implements ActionListener {
 						num1=(Double.parseDouble(textField1.getText()));
 						textField5.setText(String.valueOf(result));
 					}
-					
+			
 				if ( operator=='*' || operator=='/'  ) { // changes operator to '*'||'/' when multiplying negative numbers.
-					textField6.setText(String.valueOf(num2));
+					
 					// fix when negative result minus operator stuck on '*' or '/' ????
 						if (result==num1*-num2) {
 								result*= -1;
 								num1=(Double.parseDouble(textField1.getText()));
-								textField1.setText(String.valueOf(result));
+								
+								//textField1.setText(String.valueOf(result)); cut?
 							}
-		
+							
 							textField1.setText(String.valueOf(result));
 							textField3.setText(textField3.getText().concat("-"));
 							textField4.setText("");
@@ -336,7 +337,7 @@ public class Calculator  implements ActionListener {
 				}
 				
 				else {
-				
+					 // normal operation
 					num1=Double.parseDouble(textField1.getText());
 					operator='-';
 					textField3.setText(textField3.getText().concat("-"));
@@ -345,10 +346,20 @@ public class Calculator  implements ActionListener {
 
 				}
 					// switches num1 location to make above negative * negative code work when doing normal subtraction from 0
-					if ( e.getSource()==subButton && result== 0.00 && textField6.getText().isEmpty()) {
-					num1=Double.parseDouble(textField5.getText());
-					textField1.setText(String.valueOf(result));	
+					if ( result==0.00 && textField6.getText().isEmpty()) {
+						num1=Double.parseDouble(textField5.getText());
+						textField1.setText(String.valueOf(result));	
 				}		
+					//  Allow subtraction from 0 when num1=(-) * num2=(+)= negative and addition of opposite result sums 0.00
+					if (num1<0.00) {
+						num1=Double.parseDouble(textField1.getText());
+						textField1.setText(String.valueOf(result));	
+					}
+					// allows subtraction from zero when num1 and 2 are positive
+					else {
+						
+						textField6.setText(String.valueOf(num1));
+					}
 		 }
 			
 			if (e.getSource()==addButton) { // Addition Button  +0+0+0+0+
