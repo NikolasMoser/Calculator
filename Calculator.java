@@ -84,22 +84,22 @@ public class Calculator  implements ActionListener {
 		textField1 = new JTextField(); // textField1 is 3rd from bottom invisible. parsing occuring mainly here
 		textField1.setBounds(1,510, 300, 35); 
 		textField1.setFont(myFont);
-		textField1.setVisible(true);
+		//textField1.setVisible(true);
 	
 		textField4 = new JTextField(); // invisible bottom most field allows for instant parsing and change of result into double digits
 		textField4.setBounds(1,549, 300, 35); 
 		textField4.setFont(myFont);
-		textField4.setVisible(true);
+		//textField4.setVisible(true);
 		
 		textField5 = new JTextField(); // invisible bottom most field allows for instant parsing and change of result into double digits
 		textField5.setBounds(1,580, 300, 35); 
 		textField5.setFont(myFont);
-		textField5.setVisible(true);
+		//textField5.setVisible(true);
 		
 		textField6 = new JTextField(); // invisible bottom most field allows for instant parsing and change of result into double digits
 		textField6.setBounds(1,630, 300, 35); 
 		textField6.setFont(myFont);
-		textField6.setVisible(true);
+		//textField6.setVisible(true);
 			
 		addButton = new JButton("+");
 		subButton = new JButton("-");
