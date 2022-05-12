@@ -1,3 +1,4 @@
+
 import java.math.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -84,22 +85,22 @@ public class Calculator  implements ActionListener {
 		textField1 = new JTextField(); // textField1 is 3rd from bottom invisible. parsing occuring mainly here
 		textField1.setBounds(1,510, 300, 35); 
 		textField1.setFont(myFont);
-		//textField1.setVisible(true);
+		textField1.setVisible(true);
 	
 		textField4 = new JTextField(); // invisible bottom most field allows for instant parsing and change of result into double digits
 		textField4.setBounds(1,549, 300, 35); 
 		textField4.setFont(myFont);
-		//textField4.setVisible(true);
+		textField4.setVisible(true);
 		
 		textField5 = new JTextField(); // invisible bottom most field allows for instant parsing and change of result into double digits
 		textField5.setBounds(1,580, 300, 35); 
 		textField5.setFont(myFont);
-		//textField5.setVisible(true);
+		textField5.setVisible(true);
 		
-		textField6 = new JTextField(); // invisible bottom most field allows for instant parsing and change of result into double digits
+		textField6 = new JTextField(); // used for filling and clearing as part of if statement for  * negatives 
 		textField6.setBounds(1,630, 300, 35); 
 		textField6.setFont(myFont);
-		//textField6.setVisible(true);
+		textField6.setVisible(true);
 			
 		addButton = new JButton("+");
 		subButton = new JButton("-");
@@ -272,7 +273,7 @@ public class Calculator  implements ActionListener {
 			if(e.getSource() == numberButtons[i]) { //nested if(){ statement inside for(){  loop
 				textField1.setText(textField1.getText().concat(String.valueOf((decimalFormat.format(i)))));// argument to fill field with i number button
 				textField3.setText(textField3.getText().concat(String.valueOf(decimalFormat.format((i)))));	
-				textField4.setText(textField4.getText().concat(String.valueOf(((i)))));	
+				textField4.setText(textField4.getText().concat(String.valueOf((decimalFormat.format(i)))));	
 				////////////////////
 				textField5.setText(textField5.getText().concat(String.valueOf(decimalFormat.format((i))))); 
 				///////////////////// 
@@ -350,7 +351,7 @@ public class Calculator  implements ActionListener {
 						num1=Double.parseDouble(textField5.getText());
 						textField1.setText(String.valueOf(result));	
 				}		
-					//  Allow subtraction from 0 when num1=(-) * num2=(+)= negative and addition of opposite result sums 0.00
+					//  Allow subtraction from 0 when num1=(-) '*' num2=(+)= negative and addition of opposite result sums 0.00
 					if (num1<0.00) {
 						num1=Double.parseDouble(textField1.getText());
 						textField1.setText(String.valueOf(result));	
@@ -369,8 +370,12 @@ public class Calculator  implements ActionListener {
 				textField4.setText("");
 				textField4.setText(textField4.getText().concat(""));
 		 }
+				
 
 			if (e.getSource()==percentButton) { // division 
+			
+			
+				
 				num1 = Double.parseDouble(textField1.getText());
 				operator = '%';
 				textField3.setText(textField3.getText().concat("%"));
@@ -378,7 +383,12 @@ public class Calculator  implements ActionListener {
 				textField4.setText(textField4.getText().concat(""));
 				textField2.setText(String.valueOf(decimalFormat.format((num1/100))));
 				textField1.setText(textField2.getText());
+				
+				
+				 ///** percent button needs work 
+			
 		}	
+			
 			if (e.getSource()==squareRootButton) {
 				
 					if (result==0) {
@@ -449,9 +459,11 @@ public class Calculator  implements ActionListener {
 						textField5.setText(String.valueOf(decimalFormat.format(num1)));	
 						break;
 					case'%':  
-					    result=(num1/100)*num2; 
-					   	textField1.setText(String.valueOf(decimalFormat.format(result)));
+				
+					    result=(num1/num2)*100; 
+					   	textField1.setText(String.valueOf((result)));
 						textField5.setText(String.valueOf(decimalFormat.format(num1)));	
+						
 					case'√':
 						result=(Math.sqrt(num2));
 						textField1.setText(String.valueOf(decimalFormat.format(result)));
@@ -460,7 +472,11 @@ public class Calculator  implements ActionListener {
 				}
 			// fixes decimal format display floating point error and commas for thousands
 				DecimalFormat numform = new DecimalFormat("###,##0.###########");
-				textField2.setText(String.valueOf(numform.format(result)));		
+				textField2.setText(String.valueOf(numform.format(result)));	
+				
+				if (operator=='%') { // shows percent of 1st number entered in decimal notation.. no 2nd num or multiplication needed
+					textField2.setText(textField1.getText());	
+				}
 		}	
 			
 		if (e.getSource()==clearButton) {	
@@ -476,7 +492,7 @@ public class Calculator  implements ActionListener {
 			result=0;
 			operator='\0';	
 		}	
-	
+	//** needs work
 		if(e.getSource()==deleteButton) {
 		   String string = textField3.getText();
 		   DecimalFormat numform = new DecimalFormat("###,##0.###########");
